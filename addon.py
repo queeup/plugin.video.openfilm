@@ -43,7 +43,7 @@ class Main:
     html = urllib.urlopen(URL).read()
     soup = BS(html, parseOnlyThese=SoupStrainer('ul', {'id':'header_main_menu'}))
     for a in soup.li.div.ul.findAll('a'):
-      title = a.string
+      title = a.string.replace('&amp;', '&')
       link = URL + a['href']
       parameters = '%s?action=sort&url=%s' % (sys.argv[0], urllib.quote_plus(link))
       self.addDirectoryItem(title, parameters)
