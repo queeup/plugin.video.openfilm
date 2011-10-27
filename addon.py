@@ -55,7 +55,7 @@ class Main:
     soup = BS(html, parseOnlyThese=SoupStrainer('ul', {'class':'sortingMenu sortBlock'}))
     for li in soup('li'):
       title = li.a.string
-      link = RSS_URL + li.a['href'].split('?')[1]
+      link = RSS_URL + li.a['href'].split('?')[1].replace('&amp;', '&')
       self.addDirectoryItem(title, link)
     xbmcplugin.endOfDirectory(int(sys.argv[1]), True)
 
